@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="ca">
+
+<head>
+
+meta charset="UTF-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+
+<title>Calcul de la posició d'un robot</title>
+
+<script type="text/javascript" async
+
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js">
+
+</script>
+
+<style>
+
+body {
+
+font-family: Arial, sans-serif;
+
+margin: 20px;
+
+equation (
+
+margin: 20px 0;
+
+1 results(
+
+font-weight: bold;
+
+Oculta els elements de sortida per defecte
+
+#output, #robotCanvas (
+
+display: none;
+
+} canvas (
+
+border: 1px solid black;
+
+</style>
+
+</head>
+
+<body> <h1>Calcul de la posició d'un robot amb dos braços</h1
+
+<div>
+
+<label for="a1">Longitud del primer braç (a,):</label>
+
+<input type="number" id =^ prime prime a1^ prime prime value="1" step="0.1"><br><br>
+
+<label for="a2">Longitud del segon braç (a 2 ):</ 1at >
+
+<input type="number" id =^ prime prime a2^ prime prime value z ^ prime prime 0.5^ prime prime step="0.1"><br><br>
+
+<label for="q1">Angle del primer braç (q₁, en graus): </label>
+
+<input type="number" id =^ prime prime qT^ prime prime value= ^ prime prime 45 ^ prime prime step="0.1"><br><br>
+
+<label for="q2">Angle del segon braç ( q_{2} , en graus): </label>
+
+<input type="number" id =^ prime prime q2^ prime prime value="30" step="0.1"><br><br>
+
+<button onclick="calculatePosition()">Calcula la posició</button>
+
+</div>
+
+<div id="output"></div>
+
+<canvas id="robotCanvas" width =^ prime prime 400 ^ prime prime height="400"></canvas>
+
+<script>
+
+function calculate Position() (
+
+// Agafar les dades introduïdes per l'usuari
+
+let a * 1 = parseFloat(document.getElementById('al').value);
+
+let a * 2 = parseFloat(document.getElementById("a2").value);
+
+
+let q1 deg parseFloat(document.getElementById('q1').value); // Grados let 42 deg = parseFloat(document.getElementById(q2').value); // Grados
+
+let q1q1 deg Math.PI/180, // Convertir graus a radians
+
+let q2q2 deg Math. P1/180; // Convertir graus a radians
+
+//**Mostrar els contenidors de sortida**
+
+document.getElementById("output').style.display = block; document.getElementById('robotCanvas).style.display = "block";
+
+//Fase 1: Fórmules
+
+let output = "<div class="equation'>Les equacions per calcular la posició final del robot són:</div>";
+
+output += "<div class="equation'> x=a\ 1|| cos(q, 1) +a\ 2||cos(q,1+q\ 2)||f</div>^ prime prime ; output += "<div class="equation'>[ div"; y =a\ 1||sin(q\ 1)+a\ 2
+
+//Fase 2: Substituir les variables
+
+output += "<div class='equation'>Substituint els valors:</div>";
+
+output += "<div class='equation'> [*= \mathfrak{S} \ a1)||cos( mathfrak S \ q1\ deg\ ^ )+ mathfrak S \ a2\ ||cos( mathfrak S \ q1\ deg\ ^ =
+
++5(q2_deg)")]</div>';
+
+output += <div class='equation'>[ y=\$\ a1\ |sin(S\ q1\ deg)^ )+S\ aZ )||sin(\$\ q1\ deg)^
+
++S{q2_deg)*)\\]</div>
+
+//Fase 3: Càlcul numeric detallat
+
+let x 1=a1 Math.cos(q1);
+
+let x 2=a2*Math.cos(q1+q2);
+
+let
+
+let y2a2 Math.sin(q1+ q2);
+
+outpur += "<div class='equation'>Desglossant els càlculs:</div>";
+
+output += "<div class='equation'>\\[x_1 = a_1\\cos(q_1)=${al} \\times \\cos(${q1_deg))
+
+=${x1.toFixed(2)) \\]</div>';
+
+output += "<div class='equation'>[ x \ 2=a\ 2 v cos(q\ 1+q\ 2)=S(a2) \\times \\cos($ (q1_deg)+${q2_deg)") = $(x2.toFixed(2)) ||]</ div >
+
+output += <div class='equation'>[y_1 = a_1\\sin(q_1)=${a1} \\times \\sin(${q1_deg)*) =${yl.toFixed(2)} \\]</div>';
+
+output <div class='equation'>\\[ \ 2 =a\ 2)lsin(q\ 1+q\ 2)=S(a2) \\times \sin($
+
+(q1_deg)+5(q2_deg)") $(y2.toFixed(2)) \\]</div>";
+
+//Resultat final
+
+let x =x1+x2,
+
+let y =y1+y2z
+
+output += "<div class='equation> Calculant els resultats numèrics totals:</div>";
+
+output <div class='equation'> x = 5f x.toFixed(2)) \\]</div>';
+
+output = <div class='equation> [ y = 5(y.toFixed(2)) \\]</div>";
+
+Mostrar el resultat
+
+document.getElementById("output').innerHTML = output;
+
+MathJax.typeset(); // Renderitzar MathJax per mostrar les fórmules correctament
+
+//Fase 4: Part gráfica
+
+let canvas document.getElementById('robotCanvas');
+
+let ctx canvas.getContext("2d');
+
+
+
+
+
+
+ctx.clearRect(0, 0, canvas.width, canvas.height); // Netejar canvas
+
+// Centre i escales
+
+let centerX canvas.width/2; let centerY = canvas.height/2;
+
+}
+
+let scale = 80;
+
+// Coordenades
+
+let x1_screen = centerX + x1 scale; let y1 screen = centerY-y1 scale; let x2_screen = centerX + x scale; let y2_screen = centerY -y scale;
+
+// Dibuixar braç 1
+
+ctx.beginPath(); ctx.moveTo(centerX, centerY). ctx.lineTo(x1_screen, y1_screen); ctx.strokeStyle = 'blue'; ctx.lineWidth = 5; ctx.stroke();
+
+// Dibuixar braç 2 ctx.beginPath(); ctx.moveTo(x1_screen, y1_screen); ctx.lineTo(x2_screen, y2_screen); ctx.strokeStyle = 'green'; ctx.lineWidth = 5;
+
+ctx.stroke();
+
+// Dibuixar els cercles als extrems ctx.beginPath(); ctx.arc(centerX, centerY, 5, 0, 2 Math.PI); // Base del braç ctx.fillStyle = 'red';
+
+ctx.fill();
+
+ctx.beginPath(); ctx.arc(x1_screen, y1_screen, 5, 0, 2 Math.PI); // Final del primer braç ctx.fillStyle = 'red';
+
+ctx.fill();
+
+ctx.beginPath(); ctx.arc(x2_screen, y2_screen, 5, 0, 2 Math.PI); // Final del segon braç ctx.fillStyle = 'red';
+
+ctx.fill();
+
+</script>
+
+</body>
+
+</html>
