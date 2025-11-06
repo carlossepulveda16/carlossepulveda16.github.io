@@ -90,7 +90,12 @@
         }
 
         header {
-            /*
+            /* A una pàgina web pot haver una capçalera o header i a la part inferior un peu de pàgina o foster
+            Quan el gradient lineal és 90 graus, porquè posa 90deg vol dir 90 deegrees vol dir que giro la pantalla
+            90 graus vol dir que en quin sentit va el degradat de colors , en aquest cas gira a la dreta. 
+            Si és 180 grau significa que el degradat va cap abaix. I si es 270deg girara cap a l'esquerra el degradat de colors.
+            I si són 0deg girarà el degradat de colors cap amunt.
+            linear gradient te tres arguments que són el angle el color inicial i el final.*/
             background: linear-gradient(90deg,var(--primary),#24414a);
             color: #fff;
             padding: 22px;
